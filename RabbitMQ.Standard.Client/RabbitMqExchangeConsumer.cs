@@ -59,7 +59,7 @@ namespace RabbitMQ.Standard.Client
         private readonly Action<string, Exception> _onErrorLog;
         private readonly Action<string> _onInfoLog;
 
-        public RabbitMqExchangeConsumer(ConsumerConfiguration configuration, ConnectionChannelPool connectionChannelPool, Action<string, Exception> onErrorLog, Action<string> onInfoLog)
+        public RabbitMqExchangeConsumer(ConsumerConfiguration configuration, IConnectionChannelPool connectionChannelPool, Action<string, Exception> onErrorLog, Action<string> onInfoLog)
         {
             _configuration = configuration;
             _connectionChannelPool = connectionChannelPool;

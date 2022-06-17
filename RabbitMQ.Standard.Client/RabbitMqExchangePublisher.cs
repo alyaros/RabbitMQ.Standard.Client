@@ -83,7 +83,7 @@ namespace RabbitMQ.Standard.Client
         private readonly PublisherConfiguration _publisherConfiguration;
         private readonly IConnectionChannelPool _connectionChannelPool;
 
-        public RabbitMqExchangePublisher(PublisherConfiguration publisherConfiguration, ConnectionChannelPool connectionChannelPool)
+        public RabbitMqExchangePublisher(PublisherConfiguration publisherConfiguration, IConnectionChannelPool connectionChannelPool)
         {
             _publisherConfiguration = publisherConfiguration;
             _connectionChannelPool = connectionChannelPool;
