@@ -1,0 +1,7 @@
+
+
+Consumer Watchdog (Recover On Rabbit Server Down, Network Issues etc)
+
+Connection Watchdog?
+
+Performance, Event Type, Serializers (Json)
