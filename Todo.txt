@@ -1,11 +1,17 @@
 
+Docs:
+https://www.rabbitmq.com/dotnet-api-guide.html
+
 
 Consumer Watchdog (Recover On Rabbit Server Down, Network Issues etc BUT ignore when Stopped)
 Connection In Pool Watchdog?
 
 Performance, Event Type
 
+
+
 Async Consumer:
+https://www.rabbitmq.com/dotnet-api-guide.html#consuming-async
 DispatchConsumersAsync = true
 var consumer = new AsyncEventingBasicConsumer(_channel);
 consumer.Received += ConsumerOnReceivedAsync;

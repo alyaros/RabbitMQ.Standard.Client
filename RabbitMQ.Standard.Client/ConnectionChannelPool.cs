@@ -59,7 +59,7 @@ public interface IConnectionChannelPool
 
 public class ConnectionChannelPool : IConnectionChannelPool, IDisposable
 {
-    private const int DefaultPoolSize = 5;
+    private const int DefaultPoolSize = 10;
     private readonly Func<IConnection> _connectionActivator;
     private readonly ConcurrentQueue<IModel> _pool;
     private IConnection _connection;
