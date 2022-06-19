@@ -70,7 +70,7 @@ namespace RabbitMQ.Standard.Client
 
 
 
-        public void StartAsync()
+        public void Start()
         {
             // Run LongRunning tasks on their own dedicated thread.
 
@@ -88,7 +88,7 @@ namespace RabbitMQ.Standard.Client
                 }
                 catch (Exception e)
                 {
-                    _onErrorLog?.Invoke($"{nameof(StartAsync)} Failed", e);
+                    _onErrorLog?.Invoke($"{nameof(Start)} Failed", e);
                 }
             }, _cancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
@@ -311,7 +311,7 @@ namespace RabbitMQ.Standard.Client
 
         event EventHandler<ConsumerControlMessage> OnConsumerControlMessage;
 
-        void StartAsync();
+        void Start();
         void Stop();
         void Acknowledge(object sender);
         void Reject(object sender);

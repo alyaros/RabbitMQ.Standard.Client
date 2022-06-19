@@ -40,7 +40,7 @@ namespace ConsumerConsole
             };
 
             
-            consumer.StartAsync();
+            consumer.Start();
 
 
             Console.WriteLine("Press any key to stop consumer");
