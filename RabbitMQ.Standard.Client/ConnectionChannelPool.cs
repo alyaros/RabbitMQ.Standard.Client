@@ -57,6 +57,10 @@ public interface IConnectionChannelPool
     bool Return(IModel context);
 }
 
+
+/// <summary>
+/// Should Be Single Instance
+/// </summary>
 public class ConnectionChannelPool : IConnectionChannelPool, IDisposable
 {
     private const int DefaultPoolSize = 10;
