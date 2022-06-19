@@ -164,6 +164,7 @@ public class ConnectionChannelPool : IConnectionChannelPool, IDisposable
             VirtualHost = configuration.VirtualHost,
             ClientProvidedName = configuration.CallerName,
             AutomaticRecoveryEnabled = true,
+            NetworkRecoveryInterval = TimeSpan.FromSeconds(1)
         };
 
         if (configuration.ServerAddress.Contains(","))
