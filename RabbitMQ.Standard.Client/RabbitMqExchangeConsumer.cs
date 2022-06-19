@@ -8,7 +8,6 @@ using RabbitMQ.Client.Events;
 
 namespace RabbitMQ.Standard.Client
 {
-
     public class ConsumerConfiguration
     {
 
@@ -81,7 +80,7 @@ namespace RabbitMQ.Standard.Client
                 {
                     _onInfoLog?.Invoke($"Starting Consumer Thread");
 
-                    Start(TimeSpan.FromSeconds(2), _cancellationTokenSource.Token);
+                    InnerStart(TimeSpan.FromSeconds(2), _cancellationTokenSource.Token);
                 }
                 catch (OperationCanceledException)
                 {
@@ -99,22 +98,22 @@ namespace RabbitMQ.Standard.Client
             _onInfoLog?.Invoke($"Stopping Consumer Thread");
 
             _cancellationTokenSource.Cancel();
+
+            if (_channel != null && _channel.IsOpen)
+                _channel.Close();
         }
 
         public void Acknowledge(object sender)
         {
-            if (_channel!.IsOpen)
-            {
+            if (_channel != null && _channel.IsOpen)
                 _channel.BasicAck((ulong)sender, false);
-            }
+
         }
 
         public void Reject(object sender)
         {
-            if (_channel!.IsOpen && sender is ulong val)
-            {
+            if (_channel != null && _channel.IsOpen && sender is ulong val)
                 _channel.BasicReject(val, true);
-            }
         }
 
         public void Dispose()
@@ -132,7 +131,7 @@ namespace RabbitMQ.Standard.Client
 
 
 
-        private void Start(TimeSpan timeout, CancellationToken cancellationToken)
+        private void InnerStart(TimeSpan timeout, CancellationToken cancellationToken)
         {
             Connect();
 
@@ -221,7 +220,7 @@ namespace RabbitMQ.Standard.Client
             }
             catch (Exception ex)
             {
-                _onErrorLog?.Invoke($"{nameof(OnConsumerReceived)} Failed",ex);
+                _onErrorLog?.Invoke($"{nameof(OnConsumerReceived)} Failed", ex);
             }
         }
 

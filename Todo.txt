@@ -1,7 +1,16 @@
 
 
 Consumer Watchdog (Recover On Rabbit Server Down, Network Issues etc BUT ignore when Stopped)
-
 Connection In Pool Watchdog?
 
-Performance, Event Type, Serializers (Json)
+Performance, Event Type
+
+Async Consumer:
+DispatchConsumersAsync = true
+var consumer = new AsyncEventingBasicConsumer(_channel);
+consumer.Received += ConsumerOnReceivedAsync;
+
+
+
+                
+      

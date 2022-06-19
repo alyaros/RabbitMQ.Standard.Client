@@ -15,6 +15,8 @@ public class ConnectionChannelPoolConfiguration
     /// </summary>
     public string ServerAddress { get; set; }
 
+    public string CallerName { get; set; }
+
     /// <summary>
     /// Default RabbitMQ
     /// </summary>
@@ -38,9 +40,11 @@ public class ConnectionChannelPoolConfiguration
 
     public Action<ConnectionFactory> ConnectionFactoryOptions { get; set; }
 
-    public ConnectionChannelPoolConfiguration(string serverAddress)
+    public ConnectionChannelPoolConfiguration(string serverAddress, string callerName = null)
     {
         ServerAddress = serverAddress;
+
+        CallerName = string.IsNullOrEmpty(callerName) ? Assembly.GetEntryAssembly()?.GetName().Name.ToLower() : callerName;
     }
 }
 
@@ -158,7 +162,8 @@ public class ConnectionChannelPool : IConnectionChannelPool, IDisposable
             Port = configuration.Port,
             Password = configuration.Password,
             VirtualHost = configuration.VirtualHost,
-            ClientProvidedName = Assembly.GetEntryAssembly()?.GetName().Name.ToLower()
+            ClientProvidedName = configuration.CallerName,
+            AutomaticRecoveryEnabled = true,
         };
 
         if (configuration.ServerAddress.Contains(","))
