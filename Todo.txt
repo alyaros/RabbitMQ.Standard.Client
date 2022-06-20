@@ -3,6 +3,14 @@ Docs:
 https://www.rabbitmq.com/dotnet-api-guide.html
 
 
+Support Priority Queue
+
+Consumer:
+public bool AutoDeleteQueue { get; set; } = false;        
+public int? MaximumMessagesLimit { get; set; } = null;        
+public bool? DurableQueue { get; set; } = null;        
+public int? TimeToLiveInQueueInMs { get; set; } = null;
+
 
 Performance + Event Type
 
