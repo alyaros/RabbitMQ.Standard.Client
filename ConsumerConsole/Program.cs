@@ -28,6 +28,7 @@ namespace ConsumerConsole
 
             consumer.OnMessageReceived += delegate (object? sender, Message message)
             {
+                Console.WriteLine("===");
                 Console.WriteLine("RoutingKey:" + message.RoutingKey);
 
                 if (message.Headers != null)
@@ -36,7 +37,11 @@ namespace ConsumerConsole
                 var forecastObj = JsonSerializer.Deserialize<WeatherForecast>(Encoding.ASCII.GetString(message.Body));
                 Console.WriteLine("Body:" + JsonSerializer.Serialize(forecastObj));
 
+                //throw new Exception("My Error : "+ forecastObj.TemperatureCelsius);
+
                 consumer.Acknowledge(sender);
+
+                Console.WriteLine("===");
             };
 
             

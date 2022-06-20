@@ -195,6 +195,7 @@ namespace RabbitMQ.Standard.Client
 
         private void OnConsumerReceived(object sender, BasicDeliverEventArgs e)
         {
+            Message message = null;
             try
             {
                 var headers = new Dictionary<string, string>();
@@ -214,13 +215,23 @@ namespace RabbitMQ.Standard.Client
                     }
                 }
 
-                var message = new Message(headers, e.Body.ToArray(), e.RoutingKey);
-
-                OnMessageReceived?.Invoke(e.DeliveryTag, message);
+                message = new Message(headers, e.Body.ToArray(), e.RoutingKey);
             }
             catch (Exception ex)
             {
-                _onErrorLog?.Invoke($"{nameof(OnConsumerReceived)} Failed", ex);
+                _onErrorLog?.Invoke($"{nameof(OnConsumerReceived)} (Message Creation) Failed", ex);
+            }
+
+
+            try
+            {
+                
+                if (message != null)
+                    OnMessageReceived?.Invoke(e.DeliveryTag, message);
+            }
+            catch (Exception ex)
+            {
+                _onErrorLog?.Invoke($"{nameof(OnConsumerReceived)} (Caller event Invoke Uncaught Exception) Failed", ex);
             }
         }
 
