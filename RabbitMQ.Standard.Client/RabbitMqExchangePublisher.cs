@@ -10,13 +10,12 @@ namespace RabbitMQ.Standard.Client
 
         public static SendResult Success { get; } = new SendResult { Succeeded = true };
 
-        public static SendResult Failed(Exception ex, string errorCode = null, string errorDescription = null)
+        public static SendResult Failed(Exception ex, string errorDescription = null)
         {
             var result = new SendResult
             {
                 Succeeded = false,
                 Exception = ex,
-                ErrorCode = errorCode,
                 ErrorDescription = errorDescription
             };
 
@@ -26,7 +25,6 @@ namespace RabbitMQ.Standard.Client
 
         public bool Succeeded { get; set; }
         public Exception Exception { get; set; }
-        public string ErrorCode { get; set; }
         public string ErrorDescription { get; set; }
 
     }
@@ -114,7 +112,7 @@ namespace RabbitMQ.Standard.Client
             }
             catch (Exception ex)
             {
-                return SendResult.Failed(ex, ex.HResult.ToString(), ex.Message);
+                return SendResult.Failed(ex, ex.Message);
             }
             finally
             {

@@ -3,11 +3,8 @@ Docs:
 https://www.rabbitmq.com/dotnet-api-guide.html
 
 
-Consumer Watchdog (Recover On Rabbit Server Down, Network Issues etc BUT ignore when Stopped)
-Connection In Pool Watchdog?
 
-Performance, Event Type
-
+Performance + Event Type
 
 
 Async Consumer:
